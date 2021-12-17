@@ -1,0 +1,35 @@
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav mode="side" opened="true">
+        <mat-nav-list>
+            <mat-list-item>
+                <mat-icon mat-list-icon class="chevron-button sidenav-button" (click)="isExpanded = !isExpanded" [ngClass]="{'rotated':isExpanded}">reorder</mat-icon>
+            </mat-list-item>
+            <mat-list-item [routerLink]="'dashboard'">
+                <mat-icon mat-list-icon class="">home</mat-icon>
+                <span *ngIf="isExpanded">Inicio</span>
+            </mat-list-item>
+            <mat-list-item [routerLink]="'clientes'">
+                <mat-icon mat-list-icon class="">supervisor_account</mat-icon>
+                <span *ngIf="isExpanded">Clientes</span>
+            </mat-list-item>
+            <mat-list-item [routerLink]="'ventas'">
+                <mat-icon mat-list-icon class="">store</mat-icon>
+                <span *ngIf="isExpanded">Ventas</span>
+            </mat-list-item>
+            <mat-list-item [routerLink]="'productos'">
+                <mat-icon mat-list-icon class="">shopping_basket</mat-icon>
+                <span *ngIf="isExpanded">Productos</span>
+            </mat-list-item>
+            <mat-list-item [routerLink]="'inventario'">
+                <mat-icon mat-list-icon class="">list_alt</mat-icon>
+                <span *ngIf="isExpanded">Inventario</span>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <div class="content">
+        <mat-toolbar>
+            <h1>Sistema de Ventas</h1>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>

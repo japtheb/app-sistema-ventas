@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-12">
+        <form name="createForm" role="form" novalidate [formGroup]="createForm" class="col-12" (ngSubmit)="save()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="create-client">Crear nueva venta</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">Aquí podrá ingresar un nuevo venta y asociarla al cliente respectivo.</p>
+                    <p class="">Los campos con (*) son obligatorios.</p>
+                    <div class="form-row align-items-start">
+                        <div class="col">
+                            <label class="form-control-label" for="field_nombre">Nombre cliente(*)</label>
+                            <select class="form-control" id="nombreCliente" name="nombreCliente" required formControlName="nombreCliente">
+                                <option selected value="0"> Seleccione</option>
+                                <option *ngFor="let tipo of lstClients" value="{{tipo.Id_Cliente}}"> {{tipo.Nombre}} - {{tipo.Apellido}}</option>
+                            </select>
+                            <div *ngIf="createForm.get('nombreCliente')!.invalid && (createForm.get('nombreCliente')!.dirty || createForm.get('nombreCliente')!.touched)" style="text-align: left;">
+                                <small class="form-text text-danger" *ngIf="createForm.get('nombreCliente')?.errors?.required">
+                                    Este campo es obligatorio
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="form-control-label" for="field_nombre">Producto (*)</label>
+                            <select class="form-control" id="producto" name="producto" required formControlName="producto">
+                                <option selected value="0"> Seleccione</option>
+                                <option *ngFor="let tipo of lstProductos" value="{{tipo.Id_Producto}}"> {{tipo.Nombre_Producto}}</option>
+                            </select>
+                            <div *ngIf="createForm.get('producto')!.invalid && (createForm.get('producto')!.dirty || createForm.get('producto')!.touched)" style="text-align: left;">
+                                <small class="form-text text-danger" *ngIf="createForm.get('producto')?.errors?.required">
+                                    Este campo es obligatorio
+                                </small>
+                            </div>
+                            <div class="col">
+                                <label class="form-control-label" for="field_cantidad">Cantidad (*)</label>
+                                <input type="number" class="form-control" name="cantidad" id="field_cantidad" formControlName="cantidad" #cantidad (focusout)="calculatedPrice()"/>
+                                <div *ngIf="createForm.get('cantidad')!.invalid && (createForm.get('cantidad')!.dirty || createForm.get('cantidad')!.touched)" style="text-align: left;">
+                                    <small class="form-text text-danger" *ngIf="createForm.get('cantidad')?.errors?.required">
+                                        Este campo es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label class="form-control-label" for="field_valorTotal">Valor Total (*)</label>
+                                <input type="number" class="form-control" name="valorTotal" id="field_valorTotal" formControlName="valorTotal" #valorTotal readonly/>
+                                <div *ngIf="createForm.get('valorTotal')!.invalid && (createForm.get('valorTotal')!.dirty || createForm.get('valorTotal')!.touched)" style="text-align: left;">
+                                    <small class="form-text text-danger" *ngIf="createForm.get('valorTotal')?.errors?.required">
+                                        Este campo es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancel-save" mat-raised-button data-dismiss="modal" (click)="previousState()">
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="!(createForm.valid && createForm.dirty) || isSaving" mat-raised-button color="primary">
+                        <span>Guardar</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-12">
+        <form name="editForm" role="form" novalidate [formGroup]="editForm" class="col-12" (ngSubmit)="save()">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="create-client">Añadir inventario</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-description">Aquí podrá ingresar el inventario para un producto.</p>
+                    <p class="">Los campos con (*) son obligatorios.</p>
+                    <div class="form-row align-items-start">
+                        <div class="col">
+                            <label class="form-label">Producto</label>
+                            <select class="form-control" id="producto" name="producto" required formControlName="producto">
+                                <option selected value="0"> Seleccione</option>
+                                <option *ngFor="let tipo of lstProductos" value="{{tipo.Id_Producto}}"> {{tipo.Nombre_Producto}}</option>
+                            </select>
+                            <div *ngIf="editForm.get('producto')!.invalid && (editForm.get('producto')!.dirty || editForm.get('producto')!.touched)" style="text-align: left;">
+                                <small class="form-text text-danger" *ngIf="editForm.get('producto')?.errors?.required">
+                                    Este campo es obligatorio
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="form-control-label" for="field_cantidad">Cantidad (*)</label>
+                            <input type="number" class="form-control" name="cantidad" id="field_cantidad" formControlName="cantidad" #cantidad/>
+                            <div *ngIf="editForm.get('cantidad')!.invalid && (editForm.get('cantidad')!.dirty || editForm.get('cantidad')!.touched)" style="text-align: left;">
+                                <small class="form-text text-danger" *ngIf="editForm.get('cantidad')?.errors?.required">
+                                    Este campo es obligatorio
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancel-save" mat-raised-button data-dismiss="modal" (click)="previousState()">
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="!(editForm.valid && editForm.dirty) || isSaving" mat-raised-button color="primary">
+                        <span>Guardar</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="">
+        <form name="deleteForm" (ngSubmit)="confirmDelete(inventory?.Id_Inventario!)">
+            <div class="modal-content " style="padding: 4em;">
+                <h2 class="modal-title">Confirmar borrado</h2>
+                <p class="text-center" >¿Seguro que desea eliminar el inventario</p>
+                <div class="modal-footer">
+                    <button type="button" id="cancel-save" mat-raised-button data-dismiss="modal" (click)="cancel()">
+                        <span>Cancelar</span>
+                    </button>
+                    <button mat-raised-button color="warn" id="delete" type="submit">
+                        <span>Eliminar</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
